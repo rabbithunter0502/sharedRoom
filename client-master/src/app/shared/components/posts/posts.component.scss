@@ -1,0 +1,54 @@
+.container {
+  .heading {
+    h1 {
+      border-bottom: 1px solid lightgray;
+      font-size: 1.6rem;
+      font-weight: 500;
+      padding-bottom: 0.5rem;
+    }
+  }
+
+  .row .card {
+    border: none;
+    margin-bottom: 1.5rem;
+
+    img {
+      border-radius: 5px;
+    }
+
+    .card-body {
+      padding: 1rem 0;
+
+      .card-subtitle {
+        color: #726d6d;
+        font-weight: 600;
+        text-transform: uppercase;
+      }
+
+      .card-title {
+        font-size: 1.1rem;
+        margin: 5px 0;
+
+        a {
+          color: black;
+          font-weight: bold;
+
+          &:hover {
+            color: #f39c12;
+            text-decoration: none;
+          }
+        }
+      }
+
+      .text-acreage {
+        // font-weight: 600;
+        // margin: 0.3rem 0;
+      }
+
+      .text-price {
+        font-weight: 600;
+        margin: 0.3rem 0;
+      }
+    }
+  }
+}

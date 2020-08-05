@@ -1,0 +1,46 @@
+.post-form {
+  padding: 1rem;
+
+  h3 {
+    padding: 15px 0 22px 0;
+    border-bottom: 2px solid #f39c12;
+    font-weight: bold;
+  }
+
+  form {
+    .form-group {
+      > label {
+        font-weight: bold;
+      }
+
+      .form-control,
+      .custom-select {
+        box-shadow: none;
+        border-radius: 0;
+        border: 1px solid black;
+        // padding-top: 0.8rem;
+        // padding-bottom: 0.8rem;
+      }
+
+      agm-map {
+        height: 400px;
+        transition: all .3s;
+      }
+    }
+
+    .alert {
+      border-radius: 0;
+      border: none;
+    }
+
+    .btn {
+      margin-top: 1.5rem;
+      margin-bottom: 1rem;
+      font-weight: 500;
+      border-radius: 0;
+      background: #f39c12;
+      border: none;
+      outline: none;
+    }
+  }
+}

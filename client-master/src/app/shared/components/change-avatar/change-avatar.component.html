@@ -1,0 +1,18 @@
+<div class="change-avatar">
+  <h3>Thay đổi hình đại diện</h3>
+
+  <div class="form-group">
+    <label for="fileUpload">Hình đại diện</label>
+    <input type="file" class="form-control-file" #fileUpload id="fileUpload" accept="image/*" (change)="upload()">
+
+    <div *ngFor="let file of files">
+      <div *ngIf="file.progress < 100"><b>Đang tải ảnh lên: </b>{{ file.progress }}%</div>
+    </div>
+
+    <div class="img-container mt-3">
+      <img *ngFor="let link of links" src="{{ link }}" alt="err?" width="100x" height="100px">
+    </div>
+  </div>
+
+  <button class="btn btn-block btn-primary" (click)="onSubmit()">Cập nhật</button>
+</div>

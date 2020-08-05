@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="553.917" height="172.5" viewBox="0 0 553.917 172.5">
+  <g id="Group_17" data-name="Group 17" transform="translate(-311.083 -809)">
+    <g id="Group_16" data-name="Group 16">
+      <g id="Group_15" data-name="Group 15">
+        <g id="Group_3" data-name="Group 3" transform="translate(201 -52)">
+          <text id="PlaceStay" transform="translate(243 984)" fill="#fff" font-size="76" font-family="TrajanPro-Bold, Trajan Pro" font-weight="700"><tspan x="0" y="0">PlaceStay</tspan></text>
+          <path id="Path_11" data-name="Path 11" d="M0,1.456H545.92" transform="translate(112.5 1027.044)" fill="none" stroke="#fff" stroke-width="10"/>
+          <path id="Path_12" data-name="Path 12" d="M0,0V50" transform="translate(139.5 959.5)" fill="none" stroke="#fff" stroke-width="20"/>
+          <path id="Path_14" data-name="Path 14" d="M78,0,53.625,22.813,28.438,46.385,0,73" transform="translate(113.5 874.5)" fill="none" stroke="#fff" stroke-width="10"/>
+          <g id="Rectangle_1" data-name="Rectangle 1" transform="translate(166 935)" fill="#fff" stroke="#fff" stroke-width="1">
+            <rect width="23" height="23" rx="5" stroke="none"/>
+            <rect x="0.5" y="0.5" width="22" height="22" rx="4.5" fill="none"/>
+          </g>
+          <g id="Rectangle_2" data-name="Rectangle 2" transform="translate(193 961)" fill="#fff" stroke="#fff" stroke-width="1">
+            <rect width="23" height="23" rx="5" stroke="none"/>
+            <rect x="0.5" y="0.5" width="22" height="22" rx="4.5" fill="none"/>
+          </g>
+          <g id="Rectangle_3" data-name="Rectangle 3" transform="translate(166 961)" fill="#fff" stroke="#fff" stroke-width="1">
+            <rect width="23" height="23" rx="5" stroke="none"/>
+            <rect x="0.5" y="0.5" width="22" height="22" rx="4.5" fill="none"/>
+          </g>
+          <g id="Rectangle_4" data-name="Rectangle 4" transform="translate(193 935)" fill="#fff" stroke="#fff" stroke-width="1">
+            <rect width="23" height="23" rx="5" stroke="none"/>
+            <rect x="0.5" y="0.5" width="22" height="22" rx="4.5" fill="none"/>
+          </g>
+          <path id="Path_13" data-name="Path 13" d="M0,0" transform="translate(187 861)" fill="none" stroke="#fff" stroke-width="10"/>
+          <path id="Path_15" data-name="Path 15" d="M50.213,50.213,22.491,22.491,13.73,13.73,0,0" transform="translate(185 874)" fill="none" stroke="#fff" stroke-width="10"/>
+          <path id="Path_16" data-name="Path 16" d="M0,1.456H505.92" transform="translate(152.5 1007.044)" fill="none" stroke="#fff" stroke-width="2"/>
+        </g>
+      </g>
+    </g>
+  </g>
+</svg>

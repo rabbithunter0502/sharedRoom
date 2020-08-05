@@ -1,0 +1,6 @@
+{
+  "vnp_TmnCode":"Q96RMBM9",
+  "vnp_HashSecret":"VGSKEDQOIDAJXNDZNQZPYKCLQCXDXQCW",
+  "vnp_Url":"http://sandbox.vnpayment.vn/paymentv2/vpcpay.html",
+  "vnp_ReturnUrl": "http://localhost:5000/da2-server/us-central1/api/payment/return"
+}

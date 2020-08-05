@@ -1,0 +1,39 @@
+.post-edit {
+  padding: 1rem;
+
+  h3 {
+    padding: 15px 0 22px 0;
+    border-bottom: 2px solid #f39c12;
+    font-weight: bold;
+  }
+
+  form {
+    .form-group {
+      >label {
+        font-weight: bold;
+      }
+
+      .form-control,
+      .custom-select {
+        border-radius: 0;
+        box-shadow: none;
+        border: 1px solid black;
+      }
+    }
+
+    .alert {
+      border-radius: 0;
+      border: none;
+    }
+
+    >.btn {
+      margin-top: 1.5rem;
+      margin-bottom: 1rem;
+      font-weight: 500;
+      border-radius: 0;
+      background: #f39c12;
+      border: none;
+      outline: none;
+    }
+  }
+}

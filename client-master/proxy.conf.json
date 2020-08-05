@@ -1,0 +1,6 @@
+{
+  "/api": {
+    "target": "http://localhost:5000/da2-server/us-central1",
+    "secure": false
+  }
+}

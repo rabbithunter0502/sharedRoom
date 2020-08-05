@@ -1,0 +1,66 @@
+.admin-account-detail {
+  h2 {
+    margin-bottom: 10px;
+  }
+
+  .account-detail {
+    margin: 2rem 0;
+
+    [class*=col] {
+      &:nth-child(1) {
+        text-align: center;
+      }
+
+      &:nth-child(2) {
+        .form-group {
+          .mat-form-field {
+            width: 100%;
+          }
+
+          .mat-radio-button~.mat-radio-button {
+            margin-left: 15px;
+          }
+
+          button~button {
+            margin-left: 10px;
+          }
+        }
+      }
+    }
+  }
+
+  .post-list {
+    .mat-form-field {
+      font-size: 14px;
+      width: 100%;
+    }
+
+    .mat-elevation-z8 {
+      box-shadow: 0 0 10px #e2e2e2;
+
+      table {
+        width: 100%;
+      }
+
+      td,
+      th {
+        width: 25%;
+
+        &.mat-cell {
+          border: none;
+        }
+
+        &.mat-header-cell {
+          border: none;
+        }
+
+        .btn {
+          width: 32px;
+          margin-right: 5px;
+          outline: none;
+          border-radius: 0;
+        }
+      }
+    }
+  }
+}

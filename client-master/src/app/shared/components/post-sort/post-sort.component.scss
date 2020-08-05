@@ -1,0 +1,19 @@
+.custom-select {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: auto;
+  border-radius: 0;
+  box-shadow: none;
+  border: 2px solid black;
+  font-weight: 500;
+
+  option {
+    font-weight: 500;
+  }
+
+  @media (max-width: 576px) {
+    position: static;
+    margin-bottom: 10px;
+  }
+}

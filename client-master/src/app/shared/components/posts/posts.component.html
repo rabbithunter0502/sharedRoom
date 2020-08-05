@@ -1,0 +1,72 @@
+<nav aria-label="breadcrumb" class="bg-white">
+  <div class="container">
+    <ol class="breadcrumb bg-transparent px-0">
+      <li class="breadcrumb-item"><a href="#" routerLink="">Trang chủ</a></li>
+      <li class="breadcrumb-item active">Bài đăng</li>
+    </ol>
+  </div>
+</nav>
+
+<div class="container">
+  <div class="heading">
+    <h1>Thuê phòng trọ, nhà trọ, chung cư mini uy tín tại Hà Nội</h1>
+    <p>
+      Cho thuê phòng trọ, nhà trọ, chung cư mini với hệ thống tòa nhà trải rộng
+      khắp cả nước tại Đơn vị vận hành nhà Tìm Trọ Nhanh.
+    </p>
+  </div>
+
+  <div class="position-relative">
+    <app-post-filter
+      (filterEvent)="onFilterChange($event)"
+      (searchEvent)="onSearchKeyup($event)"
+    >
+    </app-post-filter>
+
+    <app-post-sort (sortChange)="onSortChange($event)"> </app-post-sort>
+  </div>
+
+  <div class="row" *ngIf="posts; else loading">
+    <div
+      class="col-12 col-sm-6 col-md-4 col-lg-3"
+      *ngFor="
+        let post of posts
+          | filterPostsActive
+          | searchBy: searchKeyword
+          | filterBy: filters
+          | sortBy: field
+      "
+    >
+      <div class="card">
+        <a href="#" routerLink="/posts/{{ post.id }}">
+          <img
+            src="{{ post.images.split(';')[0] }}"
+            alt="err?"
+            class="card-img-top shadow"
+          />
+        </a>
+        <div class="card-body">
+          <h6 class="card-subtitle">{{ getCategoryName(post.categoryId) }}</h6>
+          <h5 class="card-title">
+            <a href="#" routerLink="/posts/{{ post.id }}"
+              >{{ post.apartmentNumber }}, {{ post.street }}</a
+            >
+          </h5>
+          <div class="text-acreage">
+            <span class="badge badge-warning"
+              >{{ post.acreage }}m<sup>2</sup></span
+            >
+          </div>
+          <div class="text-price">{{ post.price | currency: "VND" }}/Tháng</div>
+          <div class="text-address">
+            {{ post.ward }}, {{ post.district }}, {{ post.province }}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <ng-template #loading>
+    <app-loading></app-loading>
+  </ng-template>
+</div>

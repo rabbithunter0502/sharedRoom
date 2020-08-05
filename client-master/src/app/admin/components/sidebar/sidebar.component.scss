@@ -1,0 +1,30 @@
+.list-group {
+  border: none;
+  border-radius: 0;
+  margin-top: 1rem;
+
+  .list-group-item {
+    border: none;
+    border-radius: 0;
+
+    .item-link {
+      color: #383838;
+      font-weight: 500;
+      font-size: 1.02rem;
+      display: flex;
+      align-items: center;
+      transition: all 0.3s;
+
+      &:hover {
+        color: #f39c12;
+        text-decoration: none;
+      }
+
+      img {
+        margin-right: 1.2rem;
+        width: 25px;
+        transition: all 0.3s;
+      }
+    }
+  }
+}

@@ -1,0 +1,80 @@
+<div class="admin-category-list">
+  <h2>Danh sách chuyên mục bài đăng</h2>
+
+  <mat-grid-list cols="7" rowHeight="60px">
+    <mat-grid-tile [colspan]="1">
+      <button
+        class="font-weight-bold mb-3"
+        mat-raised-button
+        color="primary"
+        routerLink="/admin/category-new"
+      >
+        <i class="fas fa-plus"></i> Thêm chuyên mục
+      </button>
+    </mat-grid-tile>
+    <mat-grid-tile [colspan]="6">
+      <mat-form-field>
+        <mat-label>Lọc danh sách</mat-label>
+        <input
+          matInput
+          (keyup)="applyFilter($event)"
+          placeholder="Nhập từ khóa"
+          autocomplete="off"
+        />
+      </mat-form-field>
+    </mat-grid-tile>
+  </mat-grid-list>
+
+  <div class="mat-elevation-z8">
+    <table mat-table [dataSource]="dataSource" matSort>
+      <ng-container matColumnDef="id">
+        <th mat-header-cell *matHeaderCellDef>Mã chuyên mục</th>
+        <td mat-cell *matCellDef="let category">{{ category.id }}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="categoryName">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Tên chuyên mục</th>
+        <td mat-cell *matCellDef="let category">{{ category.categoryName }}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="isActive">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Hoạt động</th>
+        <td mat-cell *matCellDef="let category">
+          <span
+            class="{{ category.isActive ? 'text-success' : 'text-danger' }}"
+            >{{ category.isActive ? "Hoạt động" : "Ngừng hoạt động" }}</span
+          >
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="action">
+        <th mat-header-cell *matHeaderCellDef></th>
+        <td mat-cell *matCellDef="let category">
+          <button
+            class="btn btn-sm btn-outline-secondary"
+            routerLink="/admin/category-detail/{{ category.id }}"
+            data-toggle="tooltip"
+            data-placement="bottom"
+            title="Chỉnh sửa"
+          >
+            <i class="far fa-edit"></i>
+          </button>
+        </td>
+      </ng-container>
+
+      <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+      <mat-row *matRowDef="let account; columns: displayedColumns"></mat-row>
+    </table>
+
+    <mat-paginator
+      [pageSize]="10"
+      [pageSizeOptions]="[5, 10, 25]"
+      showFirstLastButtons
+      itemsPerPageLabel="Số tài khoản mỗi trang"
+    ></mat-paginator>
+  </div>
+
+  <ng-template #loading>
+    <app-loading></app-loading>
+  </ng-template>
+</div>

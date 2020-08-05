@@ -1,0 +1,44 @@
+<nav class="navbar navbar-expand-xl navbar-dark fixed-top">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="#" routerLink="">
+      <img src="../../../../assets/logo-white.png" width="auto" height="50" alt="err?">
+    </a>
+
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <ul class="navbar-nav ml-auto">
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown">
+          <span><i class="far fa-user"></i> &nbsp;{{ account?.email }}</span>
+        </a>
+        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+          <a class="dropdown-item d-flex align-items-stretch">
+            <a href="" routerLink="/admin/change-avatar">
+              <img class="rounded-circle" src="{{ account?.avatar }}" alt="err?" width="80">
+            </a>
+            <div class="ml-3 d-flex flex-column justify-content-center">
+              <div class="mb-1">{{ account?.fullName }}</div>
+              <div class="mt-1 small">{{ account?.phoneNumber }}</div>
+            </div>
+          </a>
+          <div class="dropdown-divider"></div>
+          <a class="dropdown-item" href="#" routerLink="/admin/account-detail/{{ account?.id }}">
+            <i class="far fa-user"></i>
+            <span class="item-text">Thông tin cá nhân</span>
+          </a>
+          <a class="dropdown-item" href="#" routerLink="/admin/change-password">
+            <i class="fas fa-key"></i>
+            <span class="item-text">Đổi mật khẩu</span>
+          </a>
+          <div class="dropdown-divider"></div>
+          <a class="dropdown-item" href="#" (click)="logout()">
+            <i class="fas fa-arrow-left"></i>
+            <span class="item-text">Đăng xuất</span>
+          </a>
+        </div>
+      </li>
+    </ul>
+  </div>
+</nav>

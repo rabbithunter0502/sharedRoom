@@ -1,0 +1,30 @@
+.feedbacks {
+  .container {
+    padding: 3rem 0;
+    text-align: center;
+
+    h2 {
+      text-transform: uppercase;
+      letter-spacing: 3px;
+    }
+
+    .divi {
+      width: 20%;
+      height: 2px;
+      background: #f39c12;
+      margin: 2rem auto;
+    }
+
+    .slider3 .slide {
+      img {
+        margin: 1rem auto;
+        border-radius: 50%;
+        box-shadow: 0 0 10px #bdbbbb;
+      }
+    }
+  }
+}
+
+.slick-slide {
+  height: unset !important;
+}

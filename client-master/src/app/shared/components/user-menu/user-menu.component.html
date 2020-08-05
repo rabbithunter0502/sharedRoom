@@ -1,0 +1,63 @@
+<div class="user-menu">
+  <div class="avatar-container d-flex align-items-stretch" *ngIf="account; else loading">
+    <img class="rounded-circle" [src]="account?.avatar" alt="err?" width="55" />
+    <div class="ml-3 d-flex flex-column justify-content-center">
+      <div class="mb-1">{{ account?.fullName }}</div>
+      <div class="mt-1 small">{{ account?.phoneNumber }}</div>
+    </div>
+  </div>
+
+  <ng-template #loading>
+    <div class="avatar-container d-flex align-items-stretch">
+      <img class="rounded-circle" src="../../../../assets/Rolling-1s-200px.svg" alt="err?" width="55" />
+      <div class="ml-3 d-flex flex-column justify-content-center">
+        <div class="mb-1">Đang tải ...</div>
+        <div class="mt-1 small"></div>
+      </div>
+    </div>
+  </ng-template>
+
+  <ul class="list-group">
+    <li class="list-group-item" routerLink="/user">
+      <a class="item-link">
+        <i class="far fa-user"></i>
+        <span class="item-text">Thông tin cá nhân</span>
+      </a>
+    </li>
+
+    <li class="list-group-item" routerLink="/user/posts">
+      <a class="item-link">
+        <i class="far fa-file-alt"></i>
+        <span class="item-text">Quản lý bài đăng</span>
+      </a>
+    </li>
+
+    <li class="list-group-item" routerLink="/user/post-form">
+      <a class="item-link">
+        <i class="fas fa-plus"></i>
+        <span class="item-text">Đăng bài</span>
+      </a>
+    </li>
+
+    <li class="list-group-item" routerLink="/user/change-avatar">
+      <a class="item-link">
+        <i class="far fa-file-image"></i>
+        <span class="item-text">Đổi hình đại diện</span>
+      </a>
+    </li>
+
+    <li class="list-group-item" routerLink="/user/change-password">
+      <a class="item-link">
+        <i class="fas fa-key"></i>
+        <span class="item-text">Đổi mật khẩu</span>
+      </a>
+    </li>
+
+    <li class="list-group-item" (click)="logout()">
+      <a class="item-link">
+        <i class="fas fa-arrow-left"></i>
+        <span class="item-text">Đăng xuất</span>
+      </a>
+    </li>
+  </ul>
+</div>

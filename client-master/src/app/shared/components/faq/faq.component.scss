@@ -1,0 +1,36 @@
+.faq {
+  position: relative;
+  overflow: hidden;
+
+  .container {
+    padding: 4rem 0;
+
+    .divi {
+      width: 20%;
+      height: 2px;
+      background: #f39c12;
+      margin: 2rem auto;
+    }
+
+    .card {
+      border: none;
+      &:nth-of-type(-n + 4) {
+        border-bottom: 1px solid #e9ecef;
+      }
+      button {
+        background: #fff;
+        color: #f39c12;
+        text-align: left;
+        padding: 1.5rem 1.4rem;
+        font-size: 1.3rem;
+        &:hover,
+        &:focus {
+          text-decoration: none;
+        }
+      }
+      .collapsed {
+        color: #495057;
+      }
+    }
+  }
+}

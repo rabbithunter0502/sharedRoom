@@ -1,0 +1,142 @@
+<div class="admin-account-add">
+  <h2>Thêm tài khoản</h2>
+
+  <div class="card">
+    <div class="card-body">
+      <form [formGroup]="form" (ngSubmit)="onSubmit()">
+        <div class="form-group">
+          <mat-form-field appearance="legacy">
+            <mat-label>Họ và tên</mat-label>
+            <input matInput formControlName="fullName" />
+            <mat-error *ngIf="form.get('fullName').errors?.required"
+              >Hãy nhập họ và tên.
+            </mat-error>
+            <mat-error *ngIf="form.get('fullName').errors?.minlength"
+              >Họ và tên ít nhất phải 8 ký tự.
+            </mat-error>
+          </mat-form-field>
+        </div>
+
+        <div class="form-group">
+          <label>Giới tính</label>
+          <mat-radio-group
+            formControlName="sex"
+            aria-label="giới tính"
+            class="input-group"
+          >
+            <mat-radio-button value="Nam">Nam</mat-radio-button>
+            <mat-radio-button value="Nữ">Nữ</mat-radio-button>
+            <mat-radio-button value="Khác">Khác</mat-radio-button>
+          </mat-radio-group>
+        </div>
+
+        <div class="form-group">
+          <mat-form-field appearance="legacy">
+            <mat-label>Email</mat-label>
+            <input matInput formControlName="email" />
+            <mat-error *ngIf="form.get('email').errors?.required"
+              >Hãy nhập email.
+            </mat-error>
+            <mat-error *ngIf="form.get('email').errors?.minlength"
+              >Địa chỉ email ít nhất phải 8 ký tự.
+            </mat-error>
+            <mat-error *ngIf="form.get('email').errors?.email"
+              >Email không đúng định dạng.
+            </mat-error>
+            <mat-error *ngIf="form.get('email').errors?.duplicateEmail"
+              >Email này đã tồn lại.
+            </mat-error>
+          </mat-form-field>
+        </div>
+
+        <div class="form-group">
+          <mat-form-field appearance="legacy">
+            <mat-label>Số điện thoại</mat-label>
+            <input matInput formControlName="phoneNumber" />
+            <mat-error *ngIf="form.get('phoneNumber').errors?.required"
+              >Hãy nhập số điện thoại.
+            </mat-error>
+            <mat-error *ngIf="form.get('phoneNumber').errors?.pattern">
+              Số điện thoại không đúng định dạng.
+            </mat-error>
+            <mat-error *ngIf="form.get('phoneNumber').errors?.duplicatePhone">
+              Số điện thoại này đã tồn lại.
+            </mat-error>
+          </mat-form-field>
+        </div>
+
+        <div class="form-group">
+          <label>Hình đại diện</label>
+          <div class="input-group">
+            <input
+              type="file"
+              class=""
+              #fileUpload
+              id="fileUpload"
+              accept="image/*"
+              (change)="upload()"
+            />
+          </div>
+
+          <div *ngFor="let file of files">
+            <div *ngIf="file.progress < 100">
+              <b>Đang tải ảnh lên: </b>{{ file.progress }}%
+            </div>
+          </div>
+
+          <div class="img-container mt-3">
+            <img
+              *ngFor="let link of links"
+              src="{{ link }}"
+              alt="err?"
+              width="100x"
+              height="100px"
+            />
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label>Vai trò</label>
+          <mat-radio-group
+            formControlName="role"
+            aria-label="vai trò"
+            class="input-group"
+          >
+            <mat-radio-button value="1">Quản trị viên</mat-radio-button>
+            <mat-radio-button value="2">Nhân viên</mat-radio-button>
+          </mat-radio-group>
+        </div>
+
+        <div class="form-group">
+          <mat-form-field appearance="legacy">
+            <mat-label>Ngày sinh</mat-label>
+            <input
+              matInput
+              [max]="maxDate"
+              [matDatepicker]="picker"
+              formControlName="dateOfBirth"
+              readonly
+            />
+            <mat-datepicker-toggle
+              matSuffix
+              [for]="picker"
+            ></mat-datepicker-toggle>
+            <mat-datepicker #picker></mat-datepicker>
+            <mat-error *ngIf="form.get('dateOfBirth').errors?.required"
+              >Hãy nhập ngày sinh.
+            </mat-error>
+          </mat-form-field>
+        </div>
+
+        <div class="form-group">
+          <button type="button" mat-raised-button (click)="back()">
+            Quay lại
+          </button>
+          <button mat-raised-button color="primary" [disabled]="form.invalid">
+            Lưu
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

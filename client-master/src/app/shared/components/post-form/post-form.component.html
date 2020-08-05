@@ -1,0 +1,624 @@
+<div class="post-form">
+  <h3>Đăng bất động sản cho thuê</h3>
+
+  <form [formGroup]="form" (ngSubmit)="onSubmit()" autocomplete="off">
+    <div class="form-group">
+      <label for="categoryId">Chuyên mục</label>
+      <select
+        class="custom-select"
+        id="categoryId"
+        formControlName="categoryId"
+        [ngClass]="{
+          'is-invalid':
+            form.get('categoryId').errors &&
+            (form.get('categoryId').touched || form.get('categoryId').dirty)
+        }"
+      >
+        <option value="">Chọn chuyên mục</option>
+        <option *ngFor="let category of categories" value="{{ category.id }}">{{
+          category.categoryName
+        }}</option>
+      </select>
+      <div
+        class="invalid-feedback"
+        *ngIf="form.get('categoryId').errors?.required"
+      >
+        Hãy chọn chuyên mục bài đăng.
+      </div>
+    </div>
+
+    <div class="form-row">
+      <div class="form-group col-md-6">
+        <label for="province">Tỉnh/TP</label>
+        <select
+          class="custom-select"
+          id="province"
+          formControlName="province"
+          (change)="getDistricts($event.target.value)"
+          [ngClass]="{
+            'is-invalid':
+              form.get('province').errors &&
+              (form.get('province').touched || form.get('province').dirty)
+          }"
+        >
+          <option value="">Chọn Tỉnh/TP</option>
+          <option
+            *ngFor="let province of provinces"
+            value="{{ province.name }}"
+            >{{ province.name }}</option
+          >
+        </select>
+        <div
+          class="invalid-feedback"
+          *ngIf="form.get('province').errors?.required"
+        >
+          Hãy chọn Tỉnh/TP.
+        </div>
+      </div>
+
+      <div class="form-group col-md-6">
+        <label for="district">Quận/Huyện</label>
+        <select
+          class="custom-select"
+          id="district"
+          formControlName="district"
+          (change)="getWardsAndStreets($event.target.value)"
+          [ngClass]="{
+            'is-invalid':
+              form.get('district').errors &&
+              (form.get('district').touched || form.get('district').dirty)
+          }"
+        >
+          <option value="">Chọn Quận/Huyện</option>
+          <option
+            *ngFor="let district of districts"
+            value="{{ district.name }}"
+            >{{ district.name }}</option
+          >
+        </select>
+        <div
+          class="invalid-feedback"
+          *ngIf="form.get('district').errors?.required"
+        >
+          Hãy chọn Quận/Huyện.
+        </div>
+      </div>
+    </div>
+
+    <div class="form-row">
+      <div class="form-group col-md-4">
+        <label for="ward">Phường/Xã</label>
+        <select
+          class="custom-select"
+          id="ward"
+          formControlName="ward"
+          [ngClass]="{
+            'is-invalid':
+              form.get('ward').errors &&
+              (form.get('ward').touched || form.get('ward').dirty)
+          }"
+        >
+          <option value="">Chọn Phường/Xã</option>
+          <option *ngFor="let ward of wards" value="{{ ward.name }}"
+            >{{ ward.prefix }} {{ ward.name }}</option
+          >
+        </select>
+        <div class="invalid-feedback" *ngIf="form.get('ward').errors?.required">
+          Hãy chọn Phường/Xã.
+        </div>
+      </div>
+
+      <div class="form-group col-md-4">
+        <label for="street">Đường/Phố</label>
+        <select
+          class="custom-select"
+          id="street"
+          formControlName="street"
+          [ngClass]="{
+            'is-invalid':
+              form.get('street').errors &&
+              (form.get('street').touched || form.get('street').dirty)
+          }"
+        >
+          <option value="">Chọn Đường/Phố</option>
+          <option
+            *ngFor="let street of streets"
+            value="{{ street.prefix }} {{ street.name }}"
+            >{{ street.prefix }} {{ street.name }}
+          </option>
+        </select>
+        <div
+          class="invalid-feedback"
+          *ngIf="form.get('street').errors?.required"
+        >
+          Hãy chọn Phường/Xã.
+        </div>
+      </div>
+
+      <div class="form-group col-md-4">
+        <label for="apartmentNumber">Số nhà</label>
+        <input
+          type="text"
+          class="form-control"
+          id="apartmentNumber"
+          formControlName="apartmentNumber"
+          placeholder="Nhập số nhà"
+          (change)="getAddress()"
+          [ngClass]="{
+            'is-invalid':
+              form.get('apartmentNumber').errors &&
+              (form.get('apartmentNumber').touched ||
+                form.get('apartmentNumber').dirty)
+          }"
+        />
+        <div
+          class="invalid-feedback"
+          *ngIf="form.get('apartmentNumber').errors?.required"
+        >
+          Hãy nhập số nhà.
+        </div>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <agm-map
+        [latitude]="21.0278"
+        [longitude]="105.8342"
+        [zoom]="10"
+        [maxZoom]="17"
+        [fitBounds]="isFitBounds"
+        (mapClick)="onMapClick($event)"
+      >
+        <agm-marker
+          [latitude]="postLocation.lat"
+          [longitude]="postLocation.lng"
+          [label]="address"
+          [agmFitBounds]="true"
+          *ngIf="postLocation.lat"
+        ></agm-marker>
+      </agm-map>
+    </div>
+
+    <div class="form-group">
+      <label for="address">Địa chỉ chính xác</label>
+      <input
+        type="text"
+        class="form-control"
+        id="address"
+        disabled
+        value="{{ address }}"
+      />
+    </div>
+
+    <div class="form-group">
+      <label>Tiện ích</label>
+
+      <div class="row">
+        <div class="col-sm-4 mb-1" *ngFor="let utility of utilityList; let i = index">
+          <div class="custom-control custom-checkbox">
+            <input type="checkbox" class="custom-control-input" [id]="i" [value]="utility" (change)="onUtilityChange($event)"/>
+            <label class="custom-control-label" [for]="i">{{ utility }}</label>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="form-row">
+      <div class="form-group col-12 col-lg-4">
+        <label for="acreage">Diện tích</label>
+        <div class="input-group">
+          <input
+            type="text"
+            class="form-control"
+            id="acreage"
+            aria-describedby="basic-addon1"
+            formControlName="acreage"
+            placeholder="Nhập diện tích"
+            [ngClass]="{
+              'is-invalid':
+                form.get('acreage').errors &&
+                (form.get('acreage').touched || form.get('acreage').dirty)
+            }"
+          />
+          <div class="input-group-append">
+            <span class="input-group-text" id="basic-addon1"
+              >m<sup>2</sup></span
+            >
+          </div>
+          <div
+            class="invalid-feedback"
+            *ngIf="form.get('acreage').errors?.required"
+          >
+            Hãy nhập diện tích.
+          </div>
+          <div
+            class="invalid-feedback"
+            *ngIf="form.get('acreage').errors?.number"
+          >
+            Diện tích không hợp lệ.
+          </div>
+        </div>
+      </div>
+
+      <div class="form-group col-12 col-lg-4">
+        <label for="numberOfRooms">Số lượng phòng</label>
+        <input
+          type="text"
+          class="form-control"
+          id="numberOfRooms"
+          formControlName="numberOfRooms"
+          placeholder="Nhập số lượng phòng"
+          [ngClass]="{
+            'is-invalid':
+              form.get('numberOfRooms').errors &&
+              (form.get('numberOfRooms').touched ||
+                form.get('numberOfRooms').dirty)
+          }"
+        />
+        <div
+          class="invalid-feedback"
+          *ngIf="form.get('numberOfRooms').errors?.required"
+        >
+          Hãy nhập số phòng.
+        </div>
+        <div
+          class="invalid-feedback"
+          *ngIf="form.get('numberOfRooms').errors?.number"
+        >
+          Số phòng không hợp lệ.
+        </div>
+      </div>
+
+      <div class="form-group col-12 col-lg-4">
+        <label for="numberOfToliets">Số lượng phòng vệ sinh</label>
+        <input
+          type="text"
+          class="form-control"
+          id="numberOfToliets"
+          formControlName="numberOfToliets"
+          placeholder="Nhập số lượng phòng vệ sinh"
+          [ngClass]="{
+            'is-invalid':
+              form.get('numberOfToliets').errors &&
+              (form.get('numberOfToliets').touched ||
+                form.get('numberOfToliets').dirty)
+          }"
+        />
+        <div
+          class="invalid-feedback"
+          *ngIf="form.get('numberOfToliets').errors?.required"
+        >
+          Hãy nhập số phòng vệ sinh.
+        </div>
+        <div
+          class="invalid-feedback"
+          *ngIf="form.get('numberOfToliets').errors?.number"
+        >
+          Số phòng vệ sinh không hợp lệ.
+        </div>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label>Kiểu nhà vệ sinh</label>
+      <div class="input-group">
+        <div class="custom-control custom-radio custom-control-inline">
+          <input
+            type="radio"
+            class="custom-control-input"
+            id="closed"
+            formControlName="tolietType"
+            value="Khép kín"
+            [ngClass]="{
+              'is-invalid':
+                form.get('tolietType').errors &&
+                (form.get('tolietType').touched || form.get('tolietType').dirty)
+            }"
+          />
+          <label class="custom-control-label" for="closed">Khép kín</label>
+        </div>
+        <div class="custom-control custom-radio custom-control-inline">
+          <input
+            type="radio"
+            class="custom-control-input"
+            id="opened"
+            formControlName="tolietType"
+            value="Không khép kín"
+            [ngClass]="{
+              'is-invalid':
+                form.get('tolietType').errors &&
+                (form.get('tolietType').touched || form.get('tolietType').dirty)
+            }"
+          />
+          <label class="custom-control-label" for="opened"
+            >Không khép kín</label
+          >
+        </div>
+      </div>
+      <div
+        class="invalid-feedback"
+        *ngIf="form.get('tolietType').errors?.required"
+      >
+        Hãy chọn loại phòng vệ sinh.
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label>Đối tượng cho thuê</label>
+      <div class="input-group">
+        <div class="custom-control custom-radio custom-control-inline">
+          <input
+            type="radio"
+            class="custom-control-input"
+            id="male"
+            formControlName="rentalObject"
+            value="Nam"
+            [ngClass]="{
+              'is-invalid':
+                form.get('rentalObject').errors &&
+                (form.get('rentalObject').touched ||
+                  form.get('rentalObject').dirty)
+            }"
+          />
+          <label class="custom-control-label" for="male">Nam</label>
+        </div>
+        <div class="custom-control custom-radio custom-control-inline">
+          <input
+            type="radio"
+            class="custom-control-input"
+            id="female"
+            formControlName="rentalObject"
+            value="Nữ"
+            [ngClass]="{
+              'is-invalid':
+                form.get('rentalObject').errors &&
+                (form.get('rentalObject').touched ||
+                  form.get('rentalObject').dirty)
+            }"
+          />
+          <label class="custom-control-label" for="female">Nữ</label>
+        </div>
+        <div class="custom-control custom-radio custom-control-inline">
+          <input
+            type="radio"
+            class="custom-control-input"
+            id="both"
+            formControlName="rentalObject"
+            value="Cả hai"
+            [ngClass]="{
+              'is-invalid':
+                form.get('rentalObject').errors &&
+                (form.get('rentalObject').touched ||
+                  form.get('rentalObject').dirty)
+            }"
+          />
+          <label class="custom-control-label" for="both">Cả hai</label>
+        </div>
+      </div>
+      <div
+        class="invalid-feedback"
+        *ngIf="form.get('rentalObject').errors?.required"
+      >
+        Hãy chọn loại phòng vệ sinh
+      </div>
+    </div>
+
+    <div class="form-row">
+      <div class="form-group col-12 col-lg-6">
+        <label for="direction">Hướng nhà</label>
+        <select
+          class="custom-select"
+          id="direction"
+          formControlName="direction"
+          [ngClass]="{
+            'is-invalid':
+              form.get('direction').errors &&
+              (form.get('direction').touched || form.get('direction').dirty)
+          }"
+        >
+          <option value="">Chọn hướng nhà</option>
+          <option value="Đông">Đông</option>
+          <option value="Nam">Nam</option>
+          <option value="Tây">Tây</option>
+          <option value="Bắc">Bắc</option>
+          <option value="Đông Bắc">Đông Bắc</option>
+          <option value="Đông Nam">Đông Nam</option>
+          <option value="Tây Bắc">Tây Bắc</option>
+          <option value="Tây Nam">Tây Nam</option>
+        </select>
+        <div
+          class="invalid-feedback"
+          *ngIf="form.get('direction').errors?.required"
+        >
+          Hãy chọn hướng nhà.
+        </div>
+      </div>
+
+      <div class="form-group col-12 col-lg-6">
+        <label for="closingTime">Thời gian đóng cửa</label>
+        <select
+          class="custom-select"
+          id="closingTime"
+          formControlName="closingTime"
+          [ngClass]="{
+            'is-invalid':
+              form.get('closingTime').errors &&
+              (form.get('closingTime').touched || form.get('closingTime').dirty)
+          }"
+        >
+          <option value="0">Thời gian tự do</option>
+          <option value="21">Sau 9 giờ tối</option>
+          <option value="22">Sau 10 giờ tôi</option>
+          <option value="23">Sau 11 giờ tối</option>
+          <option value="24">Sau 12 giờ tối</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="status">Tình trạng</label>
+      <input
+        type="text"
+        class="form-control"
+        id="status"
+        formControlName="status"
+        placeholder="Nhập tình trạng bất động sản"
+        [ngClass]="{
+          'is-invalid':
+            form.get('status').errors &&
+            (form.get('status').touched || form.get('status').dirty)
+        }"
+      />
+      <div class="invalid-feedback" *ngIf="form.get('status').errors?.required">
+        Hãy nhập tình trạng nhà trọ, phòng trọ.
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="describe">Giới thiệu</label>
+      <textarea
+        class="form-control"
+        id="describe"
+        cols="30"
+        rows="10"
+        formControlName="describe"
+        placeholder="Giới thiệu bất động sản cho thuê"
+        [ngClass]="{
+          'is-invalid':
+            form.get('describe').errors &&
+            (form.get('describe').touched || form.get('describe').dirty)
+        }"
+      ></textarea>
+      <div
+        class="invalid-feedback"
+        *ngIf="form.get('describe').errors?.required"
+      >
+        Hãy giới thiệu về chung cư mini/nhà trọ/phòng trọ của bạn.
+      </div>
+      <div
+        class="invalid-feedback"
+        *ngIf="form.get('describe').errors?.minlength"
+      >
+        Ít nhất 50 ký tự.
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="fileUpload">Hình ảnh mô tả</label>
+      <input
+        type="file"
+        class="form-control-file"
+        #fileUpload
+        id="fileUpload"
+        multiple="multiple"
+        accept="image/*"
+        (change)="upload()"
+      />
+
+      <div *ngFor="let file of files">
+        <div *ngIf="file.progress < 100">
+          <b>Đang tải ảnh lên: </b>{{ file.progress }}%
+        </div>
+      </div>
+
+      <div class="img-container mt-3">
+        <img
+          class="ml-1 mb-1"
+          *ngFor="let link of links"
+          src="{{ link }}"
+          alt="err?"
+          width="200px"
+          height="150px"
+        />
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="price">Giá tiền</label>
+      <div class="input-group">
+        <input
+          type="text"
+          class="form-control"
+          id="price"
+          aria-describedby="basic-addon2"
+          formControlName="price"
+          placeholder="Nhập giá thuê theo tháng"
+          [ngClass]="{
+            'is-invalid':
+              form.get('price').errors &&
+              (form.get('price').touched || form.get('price').dirty)
+          }"
+        />
+        <div class="input-group-append">
+          <span class="input-group-text" id="basic-addon2">VNĐ/Tháng</span>
+        </div>
+        <div
+          class="invalid-feedback"
+          *ngIf="form.get('price').errors?.required"
+        >
+          Hãy nhập giá tiền VNĐ/Tháng.
+        </div>
+        <div class="invalid-feedback" *ngIf="form.get('price').errors?.number">
+          Giá tiền không hợp lệ.
+        </div>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <div class="form-row">
+        <div class="col">
+          <label for="dateSubmitted" class="font-weight-bold"
+            >Ngày đăng bài</label
+          >
+          <input
+            type="text"
+            class="form-control"
+            readonly
+            id="dateSubmitted"
+            placeholder="Tính từ thời điểm bài được đăng"
+          />
+        </div>
+        <div class="col">
+          <label for="postDays" class="font-weight-bold">Số ngày đăng (10.000vnđ/ngày)</label>
+          <input
+            type="text"
+            class="form-control"
+            id="postDays"
+            formControlName="postDays"
+            [ngClass]="{
+              'is-invalid':
+                form.get('postDays').errors &&
+                (form.get('postDays').touched || form.get('postDays').dirty)
+            }"
+          />
+          <div
+            class="invalid-feedback"
+            *ngIf="form.get('postDays').errors?.required"
+          >
+            Hãy nhập số ngày bài được đăng.
+          </div>
+          <div
+            class="invalid-feedback"
+            *ngIf="form.get('postDays').errors?.number"
+          >
+            Số ngày đăng không hợp lệ.
+          </div>
+          <div
+            class="invalid-feedback"
+            *ngIf="form.get('postDays').errors?.min"
+          >
+            Ít nhất là 10 ngày.
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <button class="btn btn-block btn-primary" [disabled]="form.invalid" *ngIf="accountRole === '2'">
+      Đăng bài
+    </button>
+
+    <button class="btn btn-block btn-primary" [disabled]="form.invalid" *ngIf="accountRole === '3'">
+      {{ form.get("postDays").value * 10000 | currency: "VND"}}
+    </button>
+  </form>
+</div>

@@ -1,0 +1,53 @@
+.navbar {
+  box-shadow: 0 0 10px #c9c8c8;
+
+  .navbar-nav {
+    .nav-link {
+      color: #383838;
+      font-weight: 500;
+      font-size: 1.02rem;
+      padding: 0.5rem 1rem;
+
+      &:hover {
+        color: #f39c12;
+      }
+
+      & + .dropdown-menu {
+        // width: 15rem;
+        border-radius: 0;
+
+        .dropdown-item {
+          color: #383838;
+          font-weight: 500;
+          font-size: 1.02rem;
+          padding: 0.5rem 1rem;
+
+          &:hover {
+            background: #fff;
+            color: #f39c12;
+          }
+
+          &:nth-child(1) {
+            padding-left: 1rem;
+            padding-right: 1rem;
+
+            &:hover {
+              background: #fff;
+              color: #383838;
+            }
+          }
+        }
+      }
+
+      &.btn {
+        background: #f39c12;
+        border-radius: 0;
+
+        &:hover {
+          background: #ce7f00;
+          color: #383838;
+        }
+      }
+    }
+  }
+}

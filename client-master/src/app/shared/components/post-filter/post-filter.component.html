@@ -1,0 +1,257 @@
+<div class="filter">
+  <div class="d-flex align-items-center">
+    <!-- Button collapse filter start -->
+    <button class="btn" data-toggle="collapse" data-target="#collapseFilter">
+      <img src="../../../../assets/filter.svg" alt="err?" />
+      <span>Lọc kết quả</span>
+    </button>
+    <!-- Button collapse filter end -->
+
+    <!-- Button collapse search start -->
+    <button class="btn" data-toggle="collapse" data-target="#collapseSearch">
+      <img src="../../../../assets/search.svg" alt="err?" />
+      <span>Tìm kiếm</span>
+    </button>
+    <!-- Button collapse search end -->
+
+    <!-- Button collapse map start -->
+    <button class="btn" data-toggle="collapse" data-target="#collapseMap">
+      <img src="../../../../assets/map.svg" alt="err?" />
+      <span>Bản đồ</span>
+    </button>
+    <!-- Button collapse map end -->
+  </div>
+
+  <!-- Keyup filter bar start -->
+  <div class="collapse" id="collapseSearch">
+    <div class="form-group">
+      <input
+        type="text"
+        class="form-control"
+        placeholder="Nhập từ khóa bạn muốn tìm"
+        (keyup)="onSearchKeyup($event)"
+      />
+    </div>
+  </div>
+  <!-- Keyup filter bar end -->
+
+  <!-- Map search start -->
+  <div class="collapse" id="collapseMap">
+    <div class="card">
+      <div class="card-body">
+        <button class="btn btn-sm btn-warning" (click)="getCurrentPosition()">Bật vị trí</button>
+        <agm-map
+          [latitude]="defaultPosition.lat"
+          [longitude]="defaultPosition.lng"
+          [fitBounds]="isFitBounds"
+          [zoom]="zoom"
+          [maxZoom]="17"
+          [fitBounds]="isFitBounds"
+          (mapClick)="setUserPosition($event)"
+        >
+          <agm-marker
+            *ngIf="userPosition.isAgmFitBounds"
+            [latitude]="userPosition.lat"
+            [longitude]="userPosition.lng"
+            [agmFitBounds]="userPosition.isAgmFitBounds"
+          >
+          </agm-marker>
+          <agm-marker
+            *ngFor="let post of posts"
+            iconUrl="../../../../assets/marker-gmaps.png"
+            [latitude]="post.lat"
+            [longitude]="post.lng"
+          >
+            <agm-info-window>
+              <h5>{{ post.apartmentNumber }}, {{ post.street }}</h5>
+              <h6>loại BĐS: {{ getCategoryName(post.categoryId) }}</h6>
+              <h6>Diện tích: {{ post.acreage }}m<sup>2</sup></h6>
+              <h6>Giá thuê: {{ post.price | currency: "VND" }}</h6>
+              <a href="" routerLink="/posts/{{ post.id }}"
+                ><strong>Chi tiết</strong></a
+              >
+            </agm-info-window>
+          </agm-marker>
+        </agm-map>
+      </div>
+    </div>
+  </div>
+  <!-- Map search end -->
+
+  <!-- Filter start -->
+  <div class="collapse" id="collapseFilter">
+    <div class="card">
+      <div class="card-body">
+        <!-- Filter by category type start -->
+        <div class="form-group">
+          <label>
+            <img src="../../../../assets/filter-category.svg" alt="err?" />
+            <span>Loại bất động sản</span>
+          </label>
+
+          <div>
+            <span
+              class="badge badge-pill"
+              *ngFor="let category of filterCategories; let i = index"
+              [ngClass]="{ 'on-filter': category.isCheck }"
+              (click)="onCategoryClick(i)"
+            >
+              <span>{{ category.dataLabel }}</span>
+              <img
+                src="../../../../assets/close.svg"
+                alt="err?"
+                class="close"
+              />
+            </span>
+          </div>
+        </div>
+        <!-- Filter by category type end -->
+
+        <!-- Filter by acreage type start -->
+        <div class="form-group">
+          <label>
+            <img src="../../../../assets/area.svg" alt="err?" />
+            <span>Diện tích</span>
+          </label>
+
+          <div>
+            <span *ngFor="let acreage of filterAcreages; let i = index">
+              <span
+                class="badge badge-pill"
+                *ngIf="acreage.dataLabel !== 'Khác'"
+                [ngClass]="{ 'on-filter': acreage.isCheck }"
+                (click)="onAcreageClick(i)"
+              >
+                <span>{{ acreage.dataLabel }} (m<sup>2</sup>)</span>
+                <img
+                  src="../../../../assets/close.svg"
+                  alt="err?"
+                  class="close"
+                />
+              </span>
+
+              <span
+                class="badge badge-pill"
+                *ngIf="acreage.dataLabel === 'Khác'"
+                [ngClass]="{ 'on-filter': acreage.isCheck }"
+                (click)="onAcreageClick(i)"
+                data-toggle="collapse"
+                data-target="#collapseUserAcreage"
+              >
+                <span>{{ acreage.dataLabel }}</span>
+                <img
+                  src="../../../../assets/close.svg"
+                  alt="err?"
+                  class="close"
+                />
+              </span>
+            </span>
+
+            <!-- User acreage input start -->
+            <div class="collapse" id="collapseUserAcreage">
+              <div class="card card-body shadow-sm">
+                <div class="form-inline">
+                  <label>Diện tích nhỏ nhất</label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    [(ngModel)]="userAcreageMin"
+                  />
+
+                  <label>Diện tích lớn nhất</label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    [(ngModel)]="userAcreageMax"
+                  />
+
+                  <button
+                    class="btn btn-sm btn-primary"
+                    (click)="onApplyUserAcreageClick()"
+                  >
+                    Áp dụng
+                  </button>
+                </div>
+              </div>
+            </div>
+            <!-- User acreage input end -->
+          </div>
+        </div>
+        <!-- Filter by acreage type end -->
+
+        <!-- Filter by price type start -->
+        <div class="form-group">
+          <label>
+            <img src="../../../../assets/price.svg" alt="err?" />
+            <span>Giá</span>
+          </label>
+
+          <div>
+            <span *ngFor="let price of filterPrices; let i = index">
+              <span
+                class="badge badge-pill"
+                *ngIf="price.dataLabel !== 'Khác'"
+                [ngClass]="{ 'on-filter': price.isCheck }"
+                (click)="onPriceClick(i)"
+              >
+                <span>{{ price.dataLabel }} (vnđ/tháng)</span>
+                <img
+                  src="../../../../assets/close.svg"
+                  alt="err?"
+                  class="close"
+                />
+              </span>
+
+              <span
+                class="badge badge-pill"
+                *ngIf="price.dataLabel === 'Khác'"
+                [ngClass]="{ 'on-filter': price.isCheck }"
+                (click)="onPriceClick(i)"
+                data-toggle="collapse"
+                data-target="#collapseUserPrice"
+              >
+                <span>{{ price.dataLabel }}</span>
+                <img
+                  src="../../../../assets/close.svg"
+                  alt="err?"
+                  class="close"
+                />
+              </span>
+            </span>
+
+            <!-- User price input start -->
+            <div class="collapse" id="collapseUserPrice">
+              <div class="card card-body">
+                <div class="form-inline">
+                  <label>Giá tiền nhỏ nhất</label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    [(ngModel)]="userPriceMin"
+                  />
+
+                  <label>Giá tiền lớn nhất</label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    [(ngModel)]="userPriceMax"
+                  />
+
+                  <button
+                    class="btn btn-sm btn-primary"
+                    (click)="onApplyUserPriceClick()"
+                  >
+                    Áp dụng
+                  </button>
+                </div>
+              </div>
+            </div>
+            <!-- User price input end -->
+          </div>
+        </div>
+        <!-- Filter by price type end -->
+      </div>
+    </div>
+  </div>
+  <!-- Filter end -->
+</div>

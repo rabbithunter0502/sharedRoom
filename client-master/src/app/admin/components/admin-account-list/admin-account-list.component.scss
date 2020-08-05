@@ -1,0 +1,43 @@
+.admin-account-list {
+  h2 {
+    margin-bottom: 10px;
+  }
+
+  button {
+    width: 100%;
+    outline: none;
+    margin-right: 5px;
+    border-radius: 0;
+  }
+
+  .mat-form-field {
+    font-size: 14px;
+    width: 100%;
+  }
+
+  .mat-elevation-z8 {
+    box-shadow: 0 0 10px #e2e2e2;
+
+    table {
+      width: 100%;
+    }
+
+    td,
+    th {
+      width: 25%;
+
+      &.mat-cell {
+        border: none;
+      }
+
+      &.mat-header-cell {
+        border: none;
+      }
+
+      .btn {
+        width: 32px;
+        margin-right: 5px;
+      }
+    }
+  }
+}

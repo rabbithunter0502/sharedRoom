@@ -1,0 +1,13 @@
+html
+  head
+    title="Tìm trọ nhanh"
+    link(rel='stylesheet', href='https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css')
+
+  body
+    .container
+      .text-center 
+        if isPaid
+          h1 Thanh toán thành công.
+        else
+          h1 Đã hủy thanh toán.
+        a.font-weight-bold(href=link) Bấm vào đây để tiếp tục!

@@ -1,0 +1,207 @@
+<div class="post-detail">
+  <div>
+    <!-- Slider-track -->
+    <div class="slider">
+      <!-- Slider item -->
+      <div *ngFor="let postImage of postImages" class="slide">
+        <img src="{{ postImage }}" alt="err?" />
+      </div>
+    </div>
+  </div>
+
+  <nav aria-label="breadcrumb" class="bg-white">
+    <div class="container">
+      <ol class="breadcrumb bg-transparent px-0">
+        <li class="breadcrumb-item"><a href="#" routerLink="">Trang chủ</a></li>
+        <li class="breadcrumb-item">
+          <a href="#" routerLink="/posts">Bài đăng</a>
+        </li>
+        <li class="breadcrumb-item active">
+          {{ post?.apartmentNumber }}, {{ post?.street }}
+        </li>
+      </ol>
+    </div>
+  </nav>
+
+  <div class="container">
+    <div class="row">
+      <div class="col-md-8">
+        <div class="d-flex justify-content-between align-items-center">
+          <h3>{{ post?.apartmentNumber }}, {{ post?.street }}</h3>
+          <div class="button-group">
+            <a
+              href="https://www.google.com/maps/dir/?api=1&destination={{
+                post?.lat
+              }},{{ post?.lng }}"
+              target="_blank"
+              class="btn btn-sm btn-info mr-1"
+            >
+              <img src="../../../../assets/direction.svg" alt="err?" />
+              <span>Chỉ đường</span>
+            </a>
+            <button
+              class="btn btn-sm btn-danger"
+              (click)="export2Doc('detail')"
+            >
+              <img src="../../../../assets/save.svg" alt="err?" />
+              <span>Lưu về máy</span>
+            </button>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-md-6">
+            <div class="main-info">
+              <img src="../../../../assets/placeholder.svg" alt="err?" />
+              <span
+                >{{ post?.ward }}, {{ post?.district }},
+                {{ post?.province }}</span
+              >
+            </div>
+            <div class="main-info">
+              <img src="../../../../assets/hotel.svg" alt="err?" />
+              <span> Phòng ngủ: {{ post?.numberOfRooms }}</span>
+            </div>
+            <div class="main-info">
+              <img src="../../../../assets/wc.svg" alt="err?" />
+              <span>
+                Phòng vệ sinh: {{ post?.numberOfToliets }} ({{
+                  post?.tolietType
+                }})</span
+              >
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="main-info">
+              <img src="../../../../assets/battery-status.svg" alt="err?" />
+              <span> Tình trạng: {{ post?.status }}</span>
+            </div>
+            <div class="main-info">
+              <img src="../../../../assets/area.svg" alt="err?" />
+              <span> Diện tích: {{ post?.acreage }} m<sup>2</sup></span>
+            </div>
+            <div class="main-info">
+              <img src="../../../../assets/stopwatch.svg" alt="err?" />
+              <span>
+                Giờ đóng cửa:
+                {{
+                  (post?.closingTime && post?.closingTime + " giờ") || "Tự do"
+                }}</span
+              >
+            </div>
+          </div>
+        </div>
+
+        <h4>Tiện ích chỗ ở</h4>
+        <div class="row">
+          <div
+            class="col-sm-4 mb-1 d-flex align-items-center"
+            *ngFor="let utility of postUtilities"
+          >
+            <img
+              src="../../../../assets/tick.svg"
+              alt="err?"
+              width="12"
+              class="mr-1"
+            />
+            <span>{{ utility }}</span>
+          </div>
+        </div>
+
+        <h4>Mô tả chung</h4>
+        <p class="text-describle">{{ post?.describe }}</p>
+
+        <h4>Vị trí</h4>
+        <agm-map [zoom]="10" [maxZoom]="15" [fitBounds]="true">
+          <agm-marker
+            iconUrl="../../../../assets/marker-gmaps.png"
+            [latitude]="post?.lat"
+            [longitude]="post?.lng"
+            [agmFitBounds]="true"
+          >
+            <agm-info-window>
+              <a
+                class="h5"
+                href="https://www.google.com/maps/dir/?api=1&destination={{
+                  post?.lat
+                }},{{ post?.lng }}"
+                target="_blank"
+                >Chỉ đường</a
+              >
+            </agm-info-window>
+          </agm-marker>
+        </agm-map>
+
+        <div id="fb-root"></div>
+        <div
+          class="fb-comments"
+          attr.data-href="http://localhost:4200/posts/{{ post?.id }}"
+          data-width="100%"
+          data-numposts="10"
+        ></div>
+      </div>
+
+      <div class="col-md-4">
+        <div class="card">
+          <div class="card-body">
+            <div class="text-center">
+              <span class="price">{{ post?.price | currency: "VND" }}</span> /
+              Tháng
+            </div>
+
+            <a
+              href="tel:{{ account?.phoneNumber }}"
+              class="btn btn-block btn-warning"
+            >
+              <img src="../../../../assets/phone.svg" alt="err?" />
+              <span>{{ account?.phoneNumber }}</span>
+            </a>
+            <a
+              href="mailto:{{ account?.email }}?Subject=Thuê bất động sản {{
+                post?.apartmentNumber
+              }}, {{ post?.street }}"
+              class="btn btn-block btn-success"
+            >
+              <img src="../../../../assets/email.svg" alt="err?" />
+              <span>{{ account?.email }}</span>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div id="detail">
+    <h2>Thông tin bất động sản</h2>
+    <p>
+      Địa chỉ: {{ post?.apartmentNumber }} {{ post?.street }},
+      {{ post?.district }}, {{ post?.province }}
+    </p>
+    <p>Giá thuê (tháng): {{ post?.price | currency: "VND" }}</p>
+    <p>Diện tích: {{ post?.acreage }} (m<sup>2</sup>)</p>
+    <p>Số lượng phòng ngủ: {{ post?.numberOfRooms }}</p>
+    <p>
+      Số lượng phòng vệ sinh: {{ post?.numberOfToliets }} ({{
+        post?.tolietType
+      }})
+    </p>
+    <p>Tình trạng: {{ post?.status }}</p>
+    <p>
+      Giờ đóng cửa:
+      {{ (post?.closingTime && post?.closingTime + " giờ") || "Tự do" }}
+    </p>
+    <p>Tiện ích nơi ở: {{ postUtilities?.join(", ") }}</p>
+    <h2>Thông tin liên hệ</h2>
+    <p>Họ tên người cho thuê: {{ account?.fullName }}</p>
+    <p>Số điện thoại liên hệ: {{ account?.phoneNumber }}</p>
+    <p>Email: {{ account?.email }}</p>
+    <h2>Hình ảnh mô tả</h2>
+    <img
+      [src]="postImage"
+      alt="err?"
+      width="600"
+      height="400"
+      *ngFor="let postImage of postImages"
+    />
+  </div>
+</div>

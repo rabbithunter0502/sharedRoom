@@ -1,0 +1,57 @@
+<div class="post-extend">
+  <h3>Gia hạn bài đăng</h3>
+
+  <ng-container *ngIf="post; else loading">
+    <p>
+      {{ post?.apartmentNumber }} {{ post?.street }}, {{ post?.district }},
+      {{ post?.province }}
+    </p>
+    <p>
+      Ngày hết hạn: {{ post.dateExpiration | date: "dd/MM/yyyy hh:mm:ss" }} ({{ status }})
+    </p>
+
+    <form [formGroup]="form" (ngSubmit)="submit()">
+      <div class="form-group">
+        <label for="extendDays">Số ngày gia hạn</label>
+        <input
+          type="text"
+          class="form-control"
+          formControlName="extendDays"
+          [ngClass]="{
+            'is-invalid':
+              form.get('extendDays').errors &&
+              (form.get('extendDays').touched || form.get('extendDays').dirty)
+          }"
+        />
+        <div
+          class="invalid-feedback"
+          *ngIf="form.get('extendDays').errors?.required"
+        >
+          Hãy nhập số ngày gia hạn.
+        </div>
+        <div
+          class="invalid-feedback"
+          *ngIf="form.get('extendDays').errors?.number"
+        >
+          Số ngày gia hạn không hợp lệ.
+        </div>
+        <div
+          class="invalid-feedback"
+          *ngIf="form.get('extendDays').errors?.min"
+        >
+          Ít nhất là 10 ngày.
+        </div>
+      </div>
+
+      <div class="form-group">
+        <button class="btn btn-block" [disabled]="form.invalid">
+          {{ form.get("extendDays").value * 10000 | currency: "VND" }}
+        </button>
+      </div>
+    </form>
+  </ng-container>
+
+  <ng-template #loading>
+    <app-loading></app-loading>
+  </ng-template>
+</div>

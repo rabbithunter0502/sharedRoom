@@ -1,0 +1,65 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="483.077" height="174.512" viewBox="0 0 483.077 174.512">
+  <defs>
+    <filter id="Rectangle_1" x="48.917" y="54.512" width="43" height="43" filterUnits="userSpaceOnUse">
+      <feOffset dx="5" dy="5" input="SourceAlpha"/>
+      <feGaussianBlur stdDeviation="3" result="blur"/>
+      <feFlood flood-color="#8f9ad5"/>
+      <feComposite operator="in" in2="blur"/>
+      <feComposite in="SourceGraphic"/>
+    </filter>
+    <filter id="Rectangle_2" x="75.917" y="80.512" width="43" height="43" filterUnits="userSpaceOnUse">
+      <feOffset dx="5" dy="5" input="SourceAlpha"/>
+      <feGaussianBlur stdDeviation="3" result="blur-2"/>
+      <feFlood flood-color="#8f9ad5"/>
+      <feComposite operator="in" in2="blur-2"/>
+      <feComposite in="SourceGraphic"/>
+    </filter>
+    <filter id="Rectangle_3" x="48.917" y="80.512" width="43" height="43" filterUnits="userSpaceOnUse">
+      <feOffset dx="5" dy="5" input="SourceAlpha"/>
+      <feGaussianBlur stdDeviation="3" result="blur-3"/>
+      <feFlood flood-color="#8f9ad5"/>
+      <feComposite operator="in" in2="blur-3"/>
+      <feComposite in="SourceGraphic"/>
+    </filter>
+    <filter id="Rectangle_4" x="75.917" y="54.512" width="43" height="43" filterUnits="userSpaceOnUse">
+      <feOffset dx="5" dy="5" input="SourceAlpha"/>
+      <feGaussianBlur stdDeviation="3" result="blur-4"/>
+      <feFlood flood-color="#8f9ad5"/>
+      <feComposite operator="in" in2="blur-4"/>
+      <feComposite in="SourceGraphic"/>
+    </filter>
+    <filter id="Line_5" x="98.917" y="22.512" width="380" height="66" filterUnits="userSpaceOnUse">
+      <feOffset dx="20" dy="20" input="SourceAlpha"/>
+      <feGaussianBlur stdDeviation="10" result="blur-5"/>
+      <feFlood flood-color="#9daaf2"/>
+      <feComposite operator="in" in2="blur-5"/>
+      <feComposite in="SourceGraphic"/>
+    </filter>
+  </defs>
+  <g id="Group_14" data-name="Group 14" transform="translate(-277.083 -1278.488)">
+    <g id="Group_13" data-name="Group 13" transform="translate(-34 958)">
+      <text id="PlaceStay" transform="translate(428 464)" fill="#3f51b5" font-size="56" font-family="TrajanPro-Bold, Trajan Pro" font-weight="700" letter-spacing="0.1em"><tspan x="0" y="0">PlaceStay</tspan></text>
+      <path id="Path_7" data-name="Path 7" d="M0,0H479.66" transform="translate(314.5 488.5)" fill="none" stroke="#000" stroke-width="13"/>
+      <path id="Path_6" data-name="Path 6" d="M0,0V86.5" transform="translate(340.5 392)" fill="none" stroke="#3f51b5" stroke-width="13"/>
+      <path id="Path_8" data-name="Path 8" d="M78,0,0,73" transform="translate(314.5 324.5)" fill="none" stroke="#000" stroke-width="10"/>
+      <g transform="matrix(1, 0, 0, 1, 311.08, 320.49)" filter="url(#Rectangle_1)">
+        <rect id="Rectangle_1-2" data-name="Rectangle 1" width="25" height="25" rx="5" transform="translate(52.92 58.51)" fill="#3f51b5"/>
+      </g>
+      <g transform="matrix(1, 0, 0, 1, 311.08, 320.49)" filter="url(#Rectangle_2)">
+        <rect id="Rectangle_2-2" data-name="Rectangle 2" width="25" height="25" rx="5" transform="translate(79.92 84.51)" fill="#3f51b5"/>
+      </g>
+      <g transform="matrix(1, 0, 0, 1, 311.08, 320.49)" filter="url(#Rectangle_3)">
+        <rect id="Rectangle_3-2" data-name="Rectangle 3" width="25" height="25" rx="5" transform="translate(52.92 84.51)" fill="#3f51b5"/>
+      </g>
+      <g transform="matrix(1, 0, 0, 1, 311.08, 320.49)" filter="url(#Rectangle_4)">
+        <rect id="Rectangle_4-2" data-name="Rectangle 4" width="25" height="25" rx="5" transform="translate(79.92 58.51)" fill="#3f51b5"/>
+      </g>
+      <path id="Path_9" data-name="Path 9" d="M74,75,0,0" transform="translate(386 324)" fill="none" stroke="#000" stroke-width="10"/>
+      <g transform="matrix(1, 0, 0, 1, 311.08, 320.49)" filter="url(#Line_5)">
+        <line id="Line_5-2" data-name="Line 5" x1="320" transform="translate(108.92 35.51)" fill="none" stroke="#000" stroke-width="6"/>
+      </g>
+      <path id="Path_1" data-name="Path 1" d="M56.1,0,34.621,20.579,23.373,31.359,0,53.758" transform="translate(791.792 354.905) rotate(90)" fill="#3f51b5" stroke="#000" stroke-width="6"/>
+      <path id="Path_10" data-name="Path 10" d="M0,0V86.5" transform="translate(353.5 392)" fill="none" stroke="#3f51b5" stroke-width="4"/>
+    </g>
+  </g>
+</svg>

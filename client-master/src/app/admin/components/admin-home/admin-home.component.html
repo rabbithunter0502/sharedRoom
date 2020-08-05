@@ -1,0 +1,13 @@
+<div class="card" *ngIf="account; else loading">
+  <div class="card-body">
+    <h1>
+      Chào buổi {{ time < 12 ? "sáng" : time < 17 ? "chiều" : "tối" }},
+      {{ account.fullName }}
+    </h1>
+    <p>Chúc bạn một ngày làm việc hiệu quả!</p>
+  </div>
+</div>
+
+<ng-template #loading>
+  <app-loading></app-loading>
+</ng-template>

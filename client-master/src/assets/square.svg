@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="512" height="512" viewBox="0 0 512 512">
+  <g id="Group_3" data-name="Group 3" transform="translate(-392 -204)">
+    <g id="check" transform="translate(392 204)">
+      <g id="Group_2" data-name="Group 2">
+        <g id="Group_1" data-name="Group 1">
+          <path id="Path_1" data-name="Path 1" d="M480,0H32A32.032,32.032,0,0,0,0,32V480a32.032,32.032,0,0,0,32,32H480a32.032,32.032,0,0,0,32-32V32A32.032,32.032,0,0,0,480,0Zm0,480-448,.016V32H480Z" fill="#f39c12"/>
+        </g>
+      </g>
+      <rect id="Rectangle_2" data-name="Rectangle 2" width="512" height="512" fill="#f39c12"/>
+      <rect id="Rectangle_1" data-name="Rectangle 1" width="448" height="448" transform="translate(32 32)" fill="#fff"/>
+    </g>
+  </g>
+</svg>

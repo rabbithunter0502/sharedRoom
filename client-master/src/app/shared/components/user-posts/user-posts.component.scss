@@ -1,0 +1,23 @@
+.user-posts {
+  padding: 1rem 0;
+
+  h3 {
+    padding: 15px 0 22px 0;
+    border-bottom: 2px solid #f39c12;
+    font-weight: bold;
+  }
+
+  .btn {
+    display: flex;
+    align-items: center;
+    
+    img {
+      width: 15px;
+      margin-right: 5px;
+    }
+  }
+
+  .is-expiration {
+    color: #ff0000;
+  }
+}

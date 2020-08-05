@@ -1,0 +1,8 @@
+[class*="col"] {
+  min-height: 92.5vh;
+
+  &:nth-child(2) {
+    box-shadow: inset 0 0 10px #e2e2e2;
+    background: #f9fbfc;
+  }
+}
